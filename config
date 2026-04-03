@@ -1,0 +1,208 @@
+# ██╗██████╗      ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗
+# ██║╚════██╗    ██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔════╝
+# ██║ █████╔╝    ██║     ██║   ██║██╔██╗ ██║█████╗  ██║██║  ███╗
+# ██║ ╚═══██╗    ██║     ██║   ██║██║╚██╗██║██╔══╝  ██║██║   ██║
+# ██║██████╔╝    ╚██████╗╚██████╔╝██║ ╚████║██║     ██║╚██████╔╝
+# ╚═╝╚═════╝      ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝
+#
+# Theme: Catppuccin Mocha
+# Font:  JetBrainsMono Nerd Font
+
+# ── Modifier ────────────────────────────────────────────────────
+set $mod Mod4
+
+# ── Fonts ───────────────────────────────────────────────────────
+font pango:JetBrainsMono Nerd Font 10
+
+# ── Catppuccin Mocha Colors ─────────────────────────────────────
+set $base     #1e1e2e
+set $mantle   #181825
+set $surface0 #313244
+set $surface1 #45475a
+set $overlay1 #7f849c
+set $text     #cdd6f4
+set $subtext  #a6adc8
+set $blue     #89b4fa
+set $mauve    #cba6f7
+set $green    #a6e3a1
+set $yellow   #f9e2af
+set $red      #f38ba8
+set $peach    #fab387
+set $teal     #94e2d5
+
+# ── Window Colors ───────────────────────────────────────────────
+#                       border    background  text      indicator  child_border
+client.focused          $blue     $base       $text     $mauve     $blue
+client.focused_inactive $surface1 $base       $subtext  $surface1  $surface0
+client.unfocused        $surface0 $base       $overlay1 $surface0  $surface0
+client.urgent           $red      $base       $text     $red       $red
+client.placeholder      $base     $base       $text     $base      $base
+client.background       $base
+
+# ── Gaps & Borders ──────────────────────────────────────────────
+# gaps inner 8  (requires i3-gaps or i3 >= 4.22)
+# gaps outer 4  (requires i3-gaps or i3 >= 4.22)
+default_border pixel 2
+default_floating_border pixel 2
+hide_edge_borders smart
+
+# ── Startup Applications ────────────────────────────────────────
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
+exec --no-startup-id xset r rate 300 50
+exec --no-startup-id bash -c 'sleep 2 && xinput list --name-only | grep -i touchpad | while IFS= read -r dev; do xinput set-prop "$dev" "libinput Tapping Enabled" 1 2>/dev/null; done'
+exec --no-startup-id setxkbmap -layout "us,ru,ua" -option "grp:alt_shift_toggle"
+
+# ── Volume & Media Keys ─────────────────────────────────────────
+# pkill -USR1 i3status sends SIGUSR1 to i3status to refresh the bar instantly
+set $refresh_i3status pkill -USR1 i3status
+bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%      && $refresh_i3status
+bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%      && $refresh_i3status
+bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@ toggle   && $refresh_i3status
+bindsym XF86AudioMicMute      exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+
+# ── Mouse ───────────────────────────────────────────────────────
+floating_modifier $mod
+focus_follows_mouse no
+
+# ── Workspaces ──────────────────────────────────────────────────
+workspace_auto_back_and_forth yes
+set $ws1  "1"
+set $ws2  "2"
+set $ws3  "3"
+set $ws4  "4"
+set $ws5  "5"
+set $ws6  "6"
+set $ws7  "7"
+set $ws8  "8"
+set $ws9  "9"
+set $ws10 "10"
+
+# ── Switch Workspace ────────────────────────────────────────────
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# ── Move Container to Workspace ─────────────────────────────────
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# ── Launch Applications ─────────────────────────────────────────
+bindsym $mod+Return      exec i3-sensible-terminal
+bindsym $mod+d           exec --no-startup-id rofi -show drun
+bindsym $mod+Shift+d     exec --no-startup-id dmenu_run
+bindsym $mod+b           exec --no-startup-id firefox
+bindsym $mod+n           exec --no-startup-id thunar
+bindsym $mod+Ctrl+l      exec --no-startup-id i3lock -c 1e1e2e
+bindsym Print            exec --no-startup-id scrot '%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/Pictures/Screenshots/'
+bindsym $mod+Print       exec --no-startup-id scrot -s '%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/Pictures/Screenshots/'
+
+# ── Window Management ───────────────────────────────────────────
+bindsym $mod+Shift+q     kill
+bindsym $mod+f           fullscreen toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space       focus mode_toggle
+bindsym $mod+a           focus parent
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus       scratchpad show
+
+# ── Split ───────────────────────────────────────────────────────
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# ── Layout ──────────────────────────────────────────────────────
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+t layout toggle split
+
+# ── Focus ───────────────────────────────────────────────────────
+bindsym $mod+Left      focus left
+bindsym $mod+Down      focus down
+bindsym $mod+Up        focus up
+bindsym $mod+Right     focus right
+bindsym $mod+j         focus left
+bindsym $mod+k         focus down
+bindsym $mod+l         focus up
+bindsym $mod+semicolon focus right
+
+# ── Move ────────────────────────────────────────────────────────
+bindsym $mod+Shift+Left      move left
+bindsym $mod+Shift+Down      move down
+bindsym $mod+Shift+Up        move up
+bindsym $mod+Shift+Right     move right
+bindsym $mod+Shift+j         move left
+bindsym $mod+Shift+k         move down
+bindsym $mod+Shift+l         move up
+bindsym $mod+Shift+semicolon move right
+
+# ── Resize Mode ─────────────────────────────────────────────────
+mode "  Resize" {
+    bindsym Left      resize shrink width  5 px or 5 ppt
+    bindsym Right     resize grow   width  5 px or 5 ppt
+    bindsym Up        resize shrink height 5 px or 5 ppt
+    bindsym Down      resize grow   height 5 px or 5 ppt
+    bindsym j         resize shrink width  5 px or 5 ppt
+    bindsym semicolon resize grow   width  5 px or 5 ppt
+    bindsym k         resize grow   height 5 px or 5 ppt
+    bindsym l         resize shrink height 5 px or 5 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "  Resize"
+
+# ── Power Mode ──────────────────────────────────────────────────
+set $power_mode 󰐥  Power  ·  󰌾 Lock (l)  ·  󰍃 Logout (e)  ·  󰑐 Reboot (r)  ·  󰐥 Shutdown (s)
+mode "$power_mode" {
+    bindsym l exec --no-startup-id i3lock -c 1e1e2e,  mode "default"
+    bindsym e exec --no-startup-id i3-msg exit,        mode "default"
+    bindsym r exec --no-startup-id systemctl reboot,   mode "default"
+    bindsym s exec --no-startup-id systemctl poweroff, mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+e mode "$power_mode"
+
+# ── i3 Control ──────────────────────────────────────────────────
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+
+# ── Bar ─────────────────────────────────────────────────────────
+bar {
+    status_command ~/.config/i3/scripts/i3status-wrapper.sh
+    position top
+    # height 28  (not supported in i3 < 4.21)
+
+    font pango:JetBrainsMono Nerd Font 10
+
+    colors {
+        background         #1e1e2e
+        statusline         #cdd6f4
+        separator          #45475a
+        focused_workspace  #89b4fa  #89b4fa  #1e1e2e
+        active_workspace   #45475a  #45475a  #cdd6f4
+        inactive_workspace #1e1e2e  #1e1e2e  #7f849c
+        urgent_workspace   #f38ba8  #f38ba8  #1e1e2e
+        binding_mode       #cba6f7  #cba6f7  #1e1e2e
+    }
+}
