@@ -5,7 +5,7 @@
 # ██║██████╔╝    ╚██████╗╚██████╔╝██║ ╚████║██║     ██║╚██████╔╝
 # ╚═╝╚═════╝      ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝
 #
-# Theme: Catppuccin Mocha
+# Theme: Material One Dark
 # Font:  JetBrainsMono Nerd Font
 
 # ── Modifier ────────────────────────────────────────────────────
@@ -14,21 +14,21 @@ set $mod Mod4
 # ── Fonts ───────────────────────────────────────────────────────
 font pango:JetBrainsMono Nerd Font 10
 
-# ── Catppuccin Mocha Colors ─────────────────────────────────────
-set $base     #1e1e2e
-set $mantle   #181825
-set $surface0 #313244
-set $surface1 #45475a
-set $overlay1 #7f849c
-set $text     #cdd6f4
-set $subtext  #a6adc8
-set $blue     #89b4fa
-set $mauve    #cba6f7
-set $green    #a6e3a1
-set $yellow   #f9e2af
-set $red      #f38ba8
-set $peach    #fab387
-set $teal     #94e2d5
+# ── Material One Dark Colors ───────────────────────────────────
+set $base     #282c34
+set $mantle   #21252b
+set $surface0 #2f343f
+set $surface1 #3e4451
+set $overlay1 #5c6370
+set $text     #abb2bf
+set $subtext  #9da5b4
+set $blue     #61afef
+set $mauve    #c678dd
+set $green    #98c379
+set $yellow   #e5c07b
+set $red      #e06c75
+set $peach    #d19a66
+set $teal     #56b6c2
 
 # ── Window Colors ───────────────────────────────────────────────
 #                       border    background  text      indicator  child_border
@@ -52,7 +52,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 exec --no-startup-id xset r rate 300 50
 exec --no-startup-id bash -c 'sleep 2 && xinput list --name-only | grep -i touchpad | while IFS= read -r dev; do xinput set-prop "$dev" "libinput Tapping Enabled" 1 2>/dev/null; done'
-exec --no-startup-id setxkbmap -layout "us,ru,ua" -option "grp:alt_shift_toggle"
+exec_always --no-startup-id setxkbmap -layout "us,ru,ua" -option "" -option "grp:alt_shift_toggle"
 
 # ── Volume & Media Keys ─────────────────────────────────────────
 # pkill -USR1 i3status sends SIGUSR1 to i3status to refresh the bar instantly
@@ -107,11 +107,11 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # ── Launch Applications ─────────────────────────────────────────
 bindsym $mod+Return      exec i3-sensible-terminal
-bindsym $mod+d           exec --no-startup-id rofi -show drun
+bindsym $mod+d           exec --no-startup-id rofi -show drun -theme ~/.config/i3/scripts/rofi-material-one.rasi
 bindsym $mod+Shift+d     exec --no-startup-id dmenu_run
 bindsym $mod+b           exec --no-startup-id firefox
 bindsym $mod+n           exec --no-startup-id thunar
-bindsym $mod+Ctrl+l      exec --no-startup-id i3lock -c 1e1e2e
+bindsym $mod+Ctrl+l      exec --no-startup-id i3lock -c 282c34
 bindsym Print            exec --no-startup-id scrot '%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/Pictures/Screenshots/'
 bindsym $mod+Print       exec --no-startup-id scrot -s '%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/Pictures/Screenshots/'
 
@@ -173,7 +173,7 @@ bindsym $mod+r mode "  Resize"
 # ── Power Mode ──────────────────────────────────────────────────
 set $power_mode 󰐥  Power  ·  󰌾 Lock (l)  ·  󰍃 Logout (e)  ·  󰑐 Reboot (r)  ·  󰐥 Shutdown (s)
 mode "$power_mode" {
-    bindsym l exec --no-startup-id i3lock -c 1e1e2e,  mode "default"
+    bindsym l exec --no-startup-id i3lock -c 282c34,  mode "default"
     bindsym e exec --no-startup-id i3-msg exit,        mode "default"
     bindsym r exec --no-startup-id systemctl reboot,   mode "default"
     bindsym s exec --no-startup-id systemctl poweroff, mode "default"
@@ -196,13 +196,13 @@ bar {
     font pango:JetBrainsMono Nerd Font 10
 
     colors {
-        background         #1e1e2e
-        statusline         #cdd6f4
-        separator          #45475a
-        focused_workspace  #89b4fa  #89b4fa  #1e1e2e
-        active_workspace   #45475a  #45475a  #cdd6f4
-        inactive_workspace #1e1e2e  #1e1e2e  #7f849c
-        urgent_workspace   #f38ba8  #f38ba8  #1e1e2e
-        binding_mode       #cba6f7  #cba6f7  #1e1e2e
+        background         #282c34
+        statusline         #abb2bf
+        separator          #3e4451
+        focused_workspace  #61afef  #61afef  #282c34
+        active_workspace   #3e4451  #3e4451  #abb2bf
+        inactive_workspace #282c34  #282c34  #5c6370
+        urgent_workspace   #e06c75  #e06c75  #282c34
+        binding_mode       #c678dd  #c678dd  #282c34
     }
 }
