@@ -21,6 +21,10 @@ window {
     border: 2px;
     border-radius: 0px;
     padding: 12px;
+    anchor: center;
+    location: center;
+    x-offset: 0px;
+    y-offset: 0px;
     background-color: @bg;
 }
 
