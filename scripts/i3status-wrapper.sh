@@ -57,7 +57,7 @@ def kbd_block():
     return {
         "name":      "kbd",
         "full_text": f"  {get_layout()}",
-        "color":     "#61afef",
+        "color":     "#03dac6",
         "markup":    "none"
     }
 

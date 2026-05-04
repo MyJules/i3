@@ -5,7 +5,7 @@
 # ██║██████╔╝    ╚██████╗╚██████╔╝██║ ╚████║██║     ██║╚██████╔╝
 # ╚═╝╚═════╝      ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝
 #
-# Theme: Material One Dark
+# Theme: Material Dark
 # Font:  JetBrainsMono Nerd Font
 
 # ── Modifier ────────────────────────────────────────────────────
@@ -14,21 +14,21 @@ set $mod Mod4
 # ── Fonts ───────────────────────────────────────────────────────
 font pango:JetBrainsMono Nerd Font 10
 
-# ── Material One Dark Colors ───────────────────────────────────
-set $base     #282c34
-set $mantle   #21252b
-set $surface0 #2f343f
-set $surface1 #3e4451
-set $overlay1 #5c6370
-set $text     #abb2bf
-set $subtext  #9da5b4
-set $blue     #61afef
-set $mauve    #c678dd
-set $green    #98c379
-set $yellow   #e5c07b
-set $red      #e06c75
-set $peach    #d19a66
-set $teal     #56b6c2
+# ── Material Dark Colors ───────────────────────────────────────
+set $base     #121212
+set $mantle   #1b1b1f
+set $surface0 #1e1e1e
+set $surface1 #2c2c2c
+set $overlay1 #8a8f98
+set $text     #e1e1e1
+set $subtext  #b0b0b0
+set $blue     #bb86fc
+set $mauve    #03dac6
+set $green    #81c784
+set $yellow   #ffd54f
+set $red      #cf6679
+set $peach    #ffb74d
+set $teal     #03dac6
 
 # ── Window Colors ───────────────────────────────────────────────
 #                       border    background  text      indicator  child_border
@@ -111,7 +111,7 @@ bindsym $mod+d           exec --no-startup-id rofi -show drun -theme ~/.config/i
 bindsym $mod+Shift+d     exec --no-startup-id dmenu_run
 bindsym $mod+b           exec --no-startup-id firefox
 bindsym $mod+n           exec --no-startup-id thunar
-bindsym $mod+Ctrl+l      exec --no-startup-id i3lock -c 282c34
+bindsym $mod+Ctrl+l      exec --no-startup-id i3lock -c 121212
 bindsym Print            exec --no-startup-id scrot '%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/Pictures/Screenshots/'
 bindsym $mod+Print       exec --no-startup-id scrot -s '%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/Pictures/Screenshots/'
 
@@ -173,7 +173,7 @@ bindsym $mod+r mode "  Resize"
 # ── Power Mode ──────────────────────────────────────────────────
 set $power_mode 󰐥  Power  ·  󰌾 Lock (l)  ·  󰍃 Logout (e)  ·  󰑐 Reboot (r)  ·  󰐥 Shutdown (s)
 mode "$power_mode" {
-    bindsym l exec --no-startup-id i3lock -c 282c34,  mode "default"
+    bindsym l exec --no-startup-id i3lock -c 121212,  mode "default"
     bindsym e exec --no-startup-id i3-msg exit,        mode "default"
     bindsym r exec --no-startup-id systemctl reboot,   mode "default"
     bindsym s exec --no-startup-id systemctl poweroff, mode "default"
@@ -196,13 +196,13 @@ bar {
     font pango:JetBrainsMono Nerd Font 10
 
     colors {
-        background         #282c34
-        statusline         #abb2bf
-        separator          #3e4451
-        focused_workspace  #61afef  #61afef  #282c34
-        active_workspace   #3e4451  #3e4451  #abb2bf
-        inactive_workspace #282c34  #282c34  #5c6370
-        urgent_workspace   #e06c75  #e06c75  #282c34
-        binding_mode       #c678dd  #c678dd  #282c34
+        background         #121212
+        statusline         #e1e1e1
+        separator          #2c2c2c
+        focused_workspace  #bb86fc  #bb86fc  #121212
+        active_workspace   #2c2c2c  #2c2c2c  #e1e1e1
+        inactive_workspace #121212  #121212  #8a8f98
+        urgent_workspace   #cf6679  #cf6679  #121212
+        binding_mode       #03dac6  #03dac6  #121212
     }
 }

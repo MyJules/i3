@@ -1,13 +1,13 @@
 * {
-    bg:            #282c34;
-    bg-alt:        #21252b;
-    fg:            #abb2bf;
-    fg-alt:        #9da5b4;
-    border:        #3e4451;
-    selected:      #3e4451;
-    selected-fg:   #e6edf3;
-    urgent:        #e06c75;
-    active:        #98c379;
+    bg:            #121212;
+    bg-alt:        #1e1e1e;
+    fg:            #e1e1e1;
+    fg-alt:        #b0b0b0;
+    border:        #2c2c2c;
+    selected:      #2c2c2c;
+    selected-fg:   #e1e1e1;
+    urgent:        #cf6679;
+    active:        #81c784;
 
     background-color: @bg;
     text-color: @fg;
