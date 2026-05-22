@@ -11,6 +11,27 @@
 # ── Modifier ────────────────────────────────────────────────────
 set $mod Mod4
 
+# Use keycodes for letter-based shortcuts so they keep working
+# when the active keyboard layout is not English.
+set $key_a         38
+set $key_b         56
+set $key_c         54
+set $key_d         40
+set $key_e         26
+set $key_f         41
+set $key_h         43
+set $key_j         44
+set $key_k         45
+set $key_l         46
+set $key_n         57
+set $key_q         24
+set $key_r         27
+set $key_s         39
+set $key_t         28
+set $key_v         55
+set $key_w         25
+set $key_semicolon 47
+
 # ── Fonts ───────────────────────────────────────────────────────
 font pango:JetBrainsMono Nerd Font 10
 
@@ -108,52 +129,52 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # ── Launch Applications ─────────────────────────────────────────
 bindsym $mod+Return      exec i3-sensible-terminal
-bindsym $mod+d           exec --no-startup-id rofi -show drun -theme ~/.config/i3/scripts/rofi-material-one.rasi
-bindsym $mod+Shift+d     exec --no-startup-id dmenu_run
-bindsym $mod+b           exec --no-startup-id firefox
-bindsym $mod+n           exec --no-startup-id thunar
-bindsym $mod+Ctrl+l      exec --no-startup-id i3lock -c 121212
+bindcode $mod+$key_d           exec --no-startup-id rofi -show drun -theme ~/.config/i3/scripts/rofi-material-one.rasi
+bindcode $mod+Shift+$key_d     exec --no-startup-id dmenu_run
+bindcode $mod+$key_b           exec --no-startup-id firefox
+bindcode $mod+$key_n           exec --no-startup-id thunar
+bindcode $mod+Ctrl+$key_l      exec --no-startup-id i3lock -c 121212
 bindsym Print            exec --no-startup-id scrot '%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/Pictures/Screenshots/'
 bindsym $mod+Print       exec --no-startup-id scrot -s '%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/Pictures/Screenshots/'
 
 # ── Window Management ───────────────────────────────────────────
-bindsym $mod+Shift+q     kill
-bindsym $mod+f           fullscreen toggle
+bindcode $mod+Shift+$key_q     kill
+bindcode $mod+$key_f           fullscreen toggle
 bindsym $mod+Shift+space floating toggle
 # Leave Super+Space available for IBus input-source switching.
-bindsym $mod+e           focus mode_toggle
-bindsym $mod+a           focus parent
+bindcode $mod+$key_e           focus mode_toggle
+bindcode $mod+$key_a           focus parent
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus       scratchpad show
 
 # ── Split ───────────────────────────────────────────────────────
-bindsym $mod+h split h
-bindsym $mod+v split v
+bindcode $mod+$key_h split h
+bindcode $mod+$key_v split v
 
 # ── Layout ──────────────────────────────────────────────────────
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+t layout toggle split
+bindcode $mod+$key_s layout stacking
+bindcode $mod+$key_w layout tabbed
+bindcode $mod+$key_t layout toggle split
 
 # ── Focus ───────────────────────────────────────────────────────
 bindsym $mod+Left      focus left
 bindsym $mod+Down      focus down
 bindsym $mod+Up        focus up
 bindsym $mod+Right     focus right
-bindsym $mod+j         focus left
-bindsym $mod+k         focus down
-bindsym $mod+l         focus up
-bindsym $mod+semicolon focus right
+bindcode $mod+$key_j         focus left
+bindcode $mod+$key_k         focus down
+bindcode $mod+$key_l         focus up
+bindcode $mod+$key_semicolon focus right
 
 # ── Move ────────────────────────────────────────────────────────
 bindsym $mod+Shift+Left      move left
 bindsym $mod+Shift+Down      move down
 bindsym $mod+Shift+Up        move up
 bindsym $mod+Shift+Right     move right
-bindsym $mod+Shift+j         move left
-bindsym $mod+Shift+k         move down
-bindsym $mod+Shift+l         move up
-bindsym $mod+Shift+semicolon move right
+bindcode $mod+Shift+$key_j         move left
+bindcode $mod+Shift+$key_k         move down
+bindcode $mod+Shift+$key_l         move up
+bindcode $mod+Shift+$key_semicolon move right
 
 # ── Resize Mode ─────────────────────────────────────────────────
 mode "  Resize" {
@@ -161,33 +182,33 @@ mode "  Resize" {
     bindsym Right     resize grow   width  5 px or 5 ppt
     bindsym Up        resize shrink height 5 px or 5 ppt
     bindsym Down      resize grow   height 5 px or 5 ppt
-    bindsym j         resize shrink width  5 px or 5 ppt
-    bindsym semicolon resize grow   width  5 px or 5 ppt
-    bindsym k         resize grow   height 5 px or 5 ppt
-    bindsym l         resize shrink height 5 px or 5 ppt
+    bindcode $key_j         resize shrink width  5 px or 5 ppt
+    bindcode $key_semicolon resize grow   width  5 px or 5 ppt
+    bindcode $key_k         resize grow   height 5 px or 5 ppt
+    bindcode $key_l         resize shrink height 5 px or 5 ppt
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
-    bindsym $mod+r mode "default"
+    bindcode $mod+$key_r mode "default"
 }
-bindsym $mod+r mode "  Resize"
+bindcode $mod+$key_r mode "  Resize"
 
 # ── Power Mode ──────────────────────────────────────────────────
 set $power_mode 󰐥  Power  ·  󰌾 Lock (l)  ·  󰍃 Logout (e)  ·  󰑐 Reboot (r)  ·  󰐥 Shutdown (s)
 mode "$power_mode" {
-    bindsym l exec --no-startup-id i3lock -c 121212,  mode "default"
-    bindsym e exec --no-startup-id i3-msg exit,        mode "default"
-    bindsym r exec --no-startup-id systemctl reboot,   mode "default"
-    bindsym s exec --no-startup-id systemctl poweroff, mode "default"
+    bindcode $key_l exec --no-startup-id i3lock -c 121212,  mode "default"
+    bindcode $key_e exec --no-startup-id i3-msg exit,        mode "default"
+    bindcode $key_r exec --no-startup-id systemctl reboot,   mode "default"
+    bindcode $key_s exec --no-startup-id systemctl poweroff, mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+Shift+e mode "$power_mode"
+bindcode $mod+Shift+$key_e mode "$power_mode"
 
 # ── i3 Control ──────────────────────────────────────────────────
-bindsym $mod+Shift+c reload
-bindsym $mod+Shift+r restart
+bindcode $mod+Shift+$key_c reload
+bindcode $mod+Shift+$key_r restart
 
 # ── Bar ─────────────────────────────────────────────────────────
 bar {
