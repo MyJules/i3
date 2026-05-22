@@ -39,7 +39,7 @@ inputbar {
     border: 2px;
     border-radius: 0px;
     border-color: @border;
-    background-color: @bg-alt;
+    background-color: @bg;
     children: [ entry ];
 }
 
