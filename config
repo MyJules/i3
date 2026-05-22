@@ -47,12 +47,13 @@ default_floating_border pixel 2
 hide_edge_borders smart
 
 # ── Startup Applications ────────────────────────────────────────
+exec --no-startup-id ibus-daemon --daemonize --xim
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 exec --no-startup-id xset r rate 300 50
 exec --no-startup-id bash -c 'sleep 2 && xinput list --name-only | grep -i touchpad | while IFS= read -r dev; do xinput set-prop "$dev" "libinput Tapping Enabled" 1 2>/dev/null; done'
-exec_always --no-startup-id setxkbmap -layout "us,ru,ua" -option "" -option "grp:alt_shift_toggle"
+# exec_always --no-startup-id setxkbmap -layout "us,ru,ua" -option "" -option "grp:alt_shift_toggle"
 
 # ── Volume & Media Keys ─────────────────────────────────────────
 # pkill -USR1 i3status sends SIGUSR1 to i3status to refresh the bar instantly
@@ -119,7 +120,8 @@ bindsym $mod+Print       exec --no-startup-id scrot -s '%Y-%m-%d_%H-%M-%S.png' -
 bindsym $mod+Shift+q     kill
 bindsym $mod+f           fullscreen toggle
 bindsym $mod+Shift+space floating toggle
-bindsym $mod+space       focus mode_toggle
+# Leave Super+Space available for IBus input-source switching.
+bindsym $mod+e           focus mode_toggle
 bindsym $mod+a           focus parent
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus       scratchpad show
@@ -189,7 +191,7 @@ bindsym $mod+Shift+r restart
 
 # ── Bar ─────────────────────────────────────────────────────────
 bar {
-    status_command ~/.config/i3/scripts/i3status-wrapper.sh
+    status_command i3status
     position top
     # height 28  (not supported in i3 < 4.21)
 
